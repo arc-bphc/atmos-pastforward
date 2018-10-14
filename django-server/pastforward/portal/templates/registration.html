@@ -1,3 +1,33 @@
+<<<<<<< HEAD
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if msg == 'success' %}
+<div class="alert alert-success">
+  <strong>Success!</strong> Team {{ team_name }} is successfully registered.
+</div>
+{% endif %}
+
+{% if msg == 'error' %}
+<div class="alert alert-danger">
+  <strong>Error!</strong> Team name {{ team_name }} is already registered.
+</div>
+{% endif %}
+
+<div class="container">
+<h2>Registration Form</h2>
+<br>
+
+{% load crispy_forms_tags %}
+<form action="/registration/" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-success">
+</form>
+</div>
+{% endblock %}
+=======
 <h2>Registration Form</h2>
 <br>
 <form action="/registration/" method="post">
@@ -5,3 +35,4 @@
     {{ form.as_p }}
     <input type="submit" value="Submit">
 </form>
+>>>>>>> f70f5c50f710cef184e7c730c6a7d216d58af9e9
