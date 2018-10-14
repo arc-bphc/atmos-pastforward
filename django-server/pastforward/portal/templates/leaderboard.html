@@ -36,11 +36,11 @@ tr:nth-child(even) {
 }
 </style>
 
-<h2>Teams</h2>
+<h2>Leaderboard</h2>
 <br>
 <table>
 	<tr>
-		<th><b>Team ID</b></th>
+		<th><b>Rank</b></th>
 		<th>Team Name</th>
 		<th>College Name</th>
 		<th>Email</th>
@@ -48,7 +48,7 @@ tr:nth-child(even) {
 	</tr>
 {% for team in teams %}
 	<tr>
-		<td>atmos_pf_{{team.pk}}</td>
+		<td>{{ forloop.counter }}</td>
 		<td>{{team.team_name}}</td>
 		<td>{{team.college_name}}</td>
 		<td>{{team.email}}</td>

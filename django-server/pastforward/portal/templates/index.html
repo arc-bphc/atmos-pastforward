@@ -1,9 +1,57 @@
-<h2>Atmos Pastforward</h2>
-<br>
-<h3>Menu:</h3>
- <ul>
-  <li><a href="/registration">Registation</a></li><br>
-  <li><a href="/admin">Admin</a></li><br>
-  <li><a href="/teams">Teams</a></li><br>
-  
-</ul> 
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'portal/pf.jpg' %}");
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.hero-text button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px 25px;
+  color: black;
+  background-color: #ddd;
+  text-align: center;
+  cursor: pointer;
+}
+
+.hero-text button:hover {
+  background-color: #555;
+  color: white;
+}
+</style>
+
+<div class="hero-image">
+  <div class="hero-text">
+    <h1 style="font-size:50px">Atmos Past-Forward</h1>
+    <p>Automation and Robotics Club</p>
+    <!-- <button>test button</button> -->
+  </div>
+</div>
+
+
+
+{% endblock %}
