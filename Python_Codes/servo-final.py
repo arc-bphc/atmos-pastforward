@@ -18,5 +18,8 @@ while True:
         end = time.time()
         print(end - st)
         board.Servos.write(servo_pin, 15)
-        time.sleep(end - st)  # servo will wait for the time the switch was pressed
+        s1 = time.time();
+        while((time.time()-s1)<(end-st+0.1)):
+            pass
+        s1=0
         board.Servos.write(servo_pin, 120)
