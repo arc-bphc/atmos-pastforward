@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+    $("#btn1").click(function(){
+        $("#link").html(" <b>Phase-1 Started </b>");
+    });
+    
+    $("#btn2").click(function(){
+        $("ol").append("<li>Appended item</li>");
+    });
+});
+var myTimer;
+function start() {
+	myTimer = setInterval(myClock, 1000);
+}
+var a = 0;
+function myClock() {
+document.getElementById("demo").innerHTML = a;
+a++;
+}
+
+</script>
+
+
+
+
+{{ team_name }}
+<br>
+<br>
+
+
+
+<!-- <button id="btn1">Append text</button> -->
+<div id= "link">
+<a  href="/gameplay/{{team_name}}/1/" id="btn1" >Start round 1</a>
+</div>
+
+<br>
+<p></p>
+</div>
+{% endblock %}

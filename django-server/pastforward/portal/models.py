@@ -5,7 +5,7 @@ from django.db import models
 
 class Contest(models.Model):
     score = models.DecimalField(default=0, decimal_places=2, max_digits=5)
-
+    phase1_time = models.DecimalField(default=0, decimal_places=2, max_digits=10)
 
 class Team(models.Model):
     contest = models.OneToOneField(
@@ -13,6 +13,7 @@ class Team(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
+    contest_done = models.BooleanField(default=False)
     team_name = models.CharField(max_length=100, unique=True)
     college_name = models.CharField(max_length=100)
     email = models.EmailField()

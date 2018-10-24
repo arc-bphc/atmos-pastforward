@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 from .forms import RegForm
 from .models import Team, Contest
+from .arduino_functions import phase1, phase2
 
 
 def index(request):
@@ -18,14 +19,15 @@ def registration(request):
             college_name = form.cleaned_data.get('college_name')
             email = form.cleaned_data.get('email')
             contest = Contest.objects.create()
+            # TODO: test form working
             try:
                 team = Team.objects.create(
                     contest=contest, team_name=team_name, college_name=college_name, email=email)
             except Exception as e:
                 new_form = RegForm()
+                contest.delete()
                 return render(request, 'registration.html', {'form': form, 'msg': 'error', 'team_name': team_name})
 
-            
             return render(request, 'registration.html', {'form': form, 'msg': 'success', 'team_name': team_name})
 
     else:
@@ -50,3 +52,25 @@ def leaderboard(request):
         'leaderboard.html',
         context={'teams': teams}
     )
+
+
+def gameplay(request, team_name, phase=0):
+
+    team = Team.objects.all().filter(team_name=team_name)
+    if (phase == 0):
+        return render(
+            request,
+            'gameplay.html',
+            context={'team_name': team[0].team_name}
+        )
+
+    if(phase == 1):
+        phase1_time = phase1()
+        return render(
+            request,
+            'phase1.html',
+            context={
+                'team_name': team[0].team_name,
+                'time': phase1_time,
+            }
+        )
