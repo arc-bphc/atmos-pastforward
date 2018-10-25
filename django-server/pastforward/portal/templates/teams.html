@@ -46,6 +46,8 @@ tr:nth-child(even) {
 		<th>Email</th>
 		<th>Score</th>
         <th></th>
+        <th></th>
+        
 	</tr>
 {% for team in teams %}
 	<tr>
@@ -53,8 +55,10 @@ tr:nth-child(even) {
 		<td>{{team.team_name}}</td>
 		<td>{{team.college_name}}</td>
 		<td>{{team.email}}</td>
-		<td>{{team.contest.score}}</td>
-        <td><a href="/gameplay/{{team.team_name}}/">Start Gameplay</a></td>
+		<td>{{team.final_score}}</td>
+        <td><a href="/round1/{{team.team_name}}/">Round1</a></td>
+        <td><a href="/round2/{{team.team_name}}/">Round2</a></td>
+        
 	</tr>
 {% endfor %}
 </table>

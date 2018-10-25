@@ -3,16 +3,13 @@ from django.db import models
 # Create your models here.
 
 
-class Contest(models.Model):
-    score = models.DecimalField(default=0, decimal_places=2, max_digits=5)
-    phase1_time = models.DecimalField(default=0, decimal_places=2, max_digits=10)
 
 class Team(models.Model):
-    contest = models.OneToOneField(
-        Contest,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
+
+    final_score = models.IntegerField(default=0)
+    score1 = models.IntegerField(default=0)
+    score2 = models.IntegerField(default=0)
+    score3 = models.IntegerField(default=0)
     contest_done = models.BooleanField(default=False)
     team_name = models.CharField(max_length=100, unique=True)
     college_name = models.CharField(max_length=100)
@@ -20,3 +17,8 @@ class Team(models.Model):
 
     def __str__(self):
         return self.team_name
+
+
+class CurrentRound(models.Model):
+    round = models.CharField(max_length=100)
+    team = models.CharField(max_length=100)

@@ -1,12 +1,27 @@
 import time
+import subprocess
+import threading
 
-def phase1():
-    # phase 1 code
-    # time.sleep(5)
-    return 10.00
+from .models import CurrentRound
 
 
-def phase2():
-    # phase2 round1 code
-    # time.sleep(5)
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+def phase1(team_name):
+    running = CurrentRound.objects.all()
+    if (len(running) == 0):
+        CurrentRound.objects.create(team=team_name, round="1")
+        threading.Thread(target=threadPhase1).start()
+
+
+def threadPhase1():
+    subprocess.run(["python2", "portal/phase1.py"])
+
+
+def phase2(team_name):
+    running = CurrentRound.objects.all()
+    if (len(running) == 0):
+        CurrentRound.objects.create(team=team_name, round="2")
+        threading.Thread(target=threadPhase2).start()
+
+
+def threadPhase2():
+    subprocess.run(["python2", "portal/phase2.py"])

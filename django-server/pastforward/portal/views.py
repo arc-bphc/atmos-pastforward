@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from .forms import RegForm
-from .models import Team, Contest
+from .models import Team, CurrentRound
 from .arduino_functions import phase1, phase2
 
 
@@ -18,11 +18,11 @@ def registration(request):
             team_name = form.cleaned_data.get('team_name')
             college_name = form.cleaned_data.get('college_name')
             email = form.cleaned_data.get('email')
-            contest = Contest.objects.create()
+            
             # TODO: test form working
             try:
                 team = Team.objects.create(
-                    contest=contest, team_name=team_name, college_name=college_name, email=email)
+                    team_name=team_name, college_name=college_name, email=email)
             except Exception as e:
                 new_form = RegForm()
                 contest.delete()
@@ -46,7 +46,7 @@ def teams(request):
 
 
 def leaderboard(request):
-    teams = Team.objects.order_by('-contest__score')
+    teams = Team.objects.order_by('-final_score')
     return render(
         request,
         'leaderboard.html',
@@ -54,23 +54,68 @@ def leaderboard(request):
     )
 
 
-def gameplay(request, team_name, phase=0):
-
-    team = Team.objects.all().filter(team_name=team_name)
-    if (phase == 0):
+def round1(request, team_name):
+    running = CurrentRound.objects.all()
+    if(len(running) == 0):
+        file = open("portal/output1.txt", "w")
+        file.write("")
+        file.close()
+        phase1(team_name)
+        text = team_name + ": Round2 Started"
         return render(
             request,
-            'gameplay.html',
-            context={'team_name': team[0].team_name}
+            'round.html',
+            context={'text': text},
         )
-
-    if(phase == 1):
-        phase1_time = phase1()
+    else:
+        file = open("portal/output1.txt", "r")
+        text = file.read()
+        if (len(CurrentRound.objects.all()) == 0):
+            text = "Release the Monitor"
         return render(
             request,
-            'phase1.html',
-            context={
-                'team_name': team[0].team_name,
-                'time': phase1_time,
-            }
+            'round.html',
+            context={'text': text},
         )
+
+
+def deleteMonitor(request):
+    running = CurrentRound.objects.all()
+    if(len(running) > 0):
+        running[0].delete()
+        return renderDefault(request, "Monitor Released")
+    else:
+        return renderDefault(request, "Monitor already Released")
+
+
+def round2(request, team_name):
+    running = CurrentRound.objects.all()
+    if(len(running) == 0):
+        file = open("portal/output1.txt", "w")
+        file.write("")
+        file.close()
+        phase2(team_name)
+        text = team_name + ": Round2 Started"
+        return render(
+            request,
+            'round.html',
+            context={'text': text},
+        )
+    else:
+        file = open("portal/output2.txt", "r")
+        text = file.read()
+        if (len(CurrentRound.objects.all()) == 0):
+            text = "Release the Monitor"
+        return render(
+            request,
+            'round.html',
+            context={'text': text},
+        )
+
+
+def renderDefault(request, text):
+    return render(
+        request,
+        'response.html',
+        context={'text': text}
+    )
