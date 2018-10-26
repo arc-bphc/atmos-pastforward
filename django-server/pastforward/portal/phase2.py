@@ -89,6 +89,8 @@ while True:
             pass
 
             if(board.digitalRead(12) == 1):
+
+                penalty = 2 * penalty
                 t1 = time.time()
                 while(board.digitalRead(12)):
                     for gate in gates:
@@ -114,6 +116,9 @@ while True:
     main_end = time.time()
     file.write("score" + str(main_end - main_start + penalty))
     print(main_end - main_start + penalty)
+    file_score = open('portal/score.txt', 'w')
+    file_score.write(str(int(main_end - main_start + penalty)))
+    file_score.close()
     break
 file.close()
 exit()

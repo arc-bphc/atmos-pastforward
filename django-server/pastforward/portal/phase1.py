@@ -1,13 +1,13 @@
 from Arduino import Arduino
 import time
 import random
-import pickle
 
+print "test started"
 file = open('portal/gate.txt', 'r')
 r = int(file.read())
 file.close()
 
-board = Arduino('9600')
+board = Arduino('9600', port='/dev/ttyACM1')
 board.pinMode(21,"INPUT_PULLUP")
 ar = [[1,4,3,2,5,8,7,6,9,10],[2,5,6,9,1,4,3,8,10,7],[7,9,2,5,1,8,6,3,10,4]]
 file = open('output.txt', 'a')
@@ -57,8 +57,8 @@ while True:
     end = time.time()
     print end-start
     file.write("\n Time taken for phase1 : "+str(end - start))
-    score_file = open('score.txt', 'w')
-    score_file.write(str(end-start))
+    score_file = open('portal/score.txt', 'w')
+    score_file.write(str(int(end-start)))
     score_file.close()
     break
 file.close()

@@ -13,6 +13,7 @@ def phase1(team_name):
 
 
 def threadPhase1(team_name):
+    print(team_name)
     team = Team.objects.all().filter(team_name=team_name)[0]
     file = open("portal/gate.txt", 'w')
     file.write(str(team.gate_set))
