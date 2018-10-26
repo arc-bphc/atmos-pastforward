@@ -28,7 +28,6 @@ def threadPhase1(team_name):
     file.close()
 
 
-
 def phase2(team_name):
     running = CurrentRound.objects.all()
     if (len(running) == 0):
