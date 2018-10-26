@@ -1,3 +1,5 @@
+from random import randint
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -21,8 +23,9 @@ def registration(request):
             
             # TODO: test form working
             try:
+                gate_set = randint(0, 9)
                 team = Team.objects.create(
-                    team_name=team_name, college_name=college_name, email=email)
+                    team_name=team_name, college_name=college_name, email=email, gate_set=gate_set)
             except Exception as e:
                 new_form = RegForm()
                 contest.delete()
@@ -103,7 +106,7 @@ def round2(request, team_name):
 
     running = CurrentRound.objects.all()
     if(len(running) == 0):
-        file = open("portal/output1.txt", "w")
+        file = open("portal/output2.txt", "w")
         file.write("")
         file.close()
         phase2(team_name)

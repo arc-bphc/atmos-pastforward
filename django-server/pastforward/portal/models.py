@@ -7,6 +7,7 @@ from django.db import models
 class Team(models.Model):
 
     final_score = models.IntegerField(default=0)
+    gate_set = models.IntegerField(default=-1)
     score1 = models.IntegerField(default=0)
     score2 = models.IntegerField(default=0)
     score3 = models.IntegerField(default=0)

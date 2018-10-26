@@ -13,11 +13,14 @@ def phase1(team_name):
 
 
 def threadPhase1(team_name):
+    team = Team.objects.all().filter(team_name=team_name)[0]
+    file = open("portal/gate.txt", 'w')
+    file.write(str(team.gate_set))
+    file.close()
     print("team name: " + team_name)
     subprocess.run(["python2", "portal/phase1.py"])
     file = open("portal/score.txt", "r")
     a = file.read()
-    team = Team.objects.all().filter(team_name=team_name)[0]
     team.score1 = int(a)
     team.final_score = team.score1 + team.score2
     team.round1_done = True
@@ -34,10 +37,13 @@ def phase2(team_name):
 
 
 def threadPhase2(team_name):
+    team = Team.objects.all().filter(team_name=team_name)[0]
+    file = open("portal/gate.txt", 'w')
+    file.write(str(team.gate_set))
+    file.close()
     subprocess.run(["python2", "portal/phase2.py"])
     file = open("portal/score.txt", "r")
     a = file.read()
-    team = Team.objects.all().filter(team_name=team_name)[0]
     team.score2 = int(a)
     team.final_score = team.score2 + team.score1
     team.round2_done = True
