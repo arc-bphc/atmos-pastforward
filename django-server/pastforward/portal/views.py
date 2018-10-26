@@ -56,6 +56,11 @@ def leaderboard(request):
 
 def round1(request, team_name):
     running = CurrentRound.objects.all()
+    team = Team.objects.all().filter(team_name=team_name)[0]
+
+    if(team.round1_done is True):
+        return renderDefault(request, "Round 1 already done. \nDelete from admin panel to start again.")
+
     if(len(running) == 0):
         file = open("portal/output1.txt", "w")
         file.write("")
@@ -89,6 +94,13 @@ def deleteMonitor(request):
 
 
 def round2(request, team_name):
+
+    team = Team.objects.all().filter(team_name=team_name)[0]
+
+    if(team.round2_done is True):
+        return renderDefault(request, "Round 2 already done. Delete from admin panel to start again.")
+
+
     running = CurrentRound.objects.all()
     if(len(running) == 0):
         file = open("portal/output1.txt", "w")

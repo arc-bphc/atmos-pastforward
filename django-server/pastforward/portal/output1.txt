@@ -1,6 +1,0 @@
-Switch is ON
-Switch is OFF
-Switch is ON
-Switch is OFF
-Switch is ON
-Switch is OFF
