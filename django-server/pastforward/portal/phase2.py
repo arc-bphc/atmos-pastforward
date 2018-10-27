@@ -9,8 +9,20 @@ file.close()
 
 
 file = open('portal/output2.txt', 'a')
+file.write('Round 2 started.\n')
+file.write('Gate set: ' + str(r) + "\n")
 
-ar = [[1, 4, 3, 2, 5, 8, 7, 6, 9, 10], [2, 5, 6, 9, 1, 4, 3, 8, 10, 7], [7, 9, 2, 5, 1, 8, 6, 3, 10, 4]]
+ar = [[10,3,7,5,8,2,1,9,4,6],
+      [4,9,6,10,8,1,2,3,5,7],
+      [10,3,7,2,9,4,1,5,6,8],
+      [10,5,1,8,2,9,7,4,3,6],
+      [4,10,8,1,2,3,9,6,7,5],
+      [9,6,10,8,2,4,5,7,1,3],
+      [10,4,5,7,1,2,9,3,6,8],
+      [9,3,6,8,2,1,4,10,7,5],
+      [8,6,9,1,10,4,5,7,3,2],
+      [6,8,9,3,4,10,7,5,2,1]]
+
 switch = [36, 52, 42, 48, 34, 46, 38, 44, 40, 50]
 # gates_led=[11,12,13,14,15,16,17,18,19,20]
 gates = [7, 10, 6, 5, 4, 2, 8, 3, 11, 9]
@@ -63,8 +75,9 @@ while True:
             if(i == 1):
                 en = time.time()
                 tim[ar[r][x] - 1] = [st, en - st, ar[r][x]]  # [time,gate_number]
+                file.write(str(int(ar[r][x])) + " " + str(int(en-st)) + "\n")
                 break
-    file.write('\nInfinty Stone lifted')
+    file.write('\nInfinty Stone lifted\n')
     print "lifted\n"
     tim = sorted(tim, key=itemgetter(0))
     print tim

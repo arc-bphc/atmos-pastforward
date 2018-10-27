@@ -2,15 +2,28 @@ from Arduino import Arduino
 import time
 import random
 
-print "test started"
 file = open('portal/gate.txt', 'r')
 r = int(file.read())
 file.close()
+file.open('portal/output1.txt', 'a')
+print "Round1 Started"
+file.write("Gate set: " + str(r) + "\n")
+file.write('Round 1 started.\n')
 
 board = Arduino('9600', port='/dev/ttyACM1')
 board.pinMode(21,"INPUT_PULLUP")
-ar = [[1,4,3,2,5,8,7,6,9,10],[2,5,6,9,1,4,3,8,10,7],[7,9,2,5,1,8,6,3,10,4]]
-file = open('output.txt', 'a')
+
+ar = [[10,3,7,5,8,2,1,9,4,6],
+      [4,9,6,10,8,1,2,3,5,7],
+      [10,3,7,2,9,4,1,5,6,8],
+      [10,5,1,8,2,9,7,4,3,6],
+      [4,10,8,1,2,3,9,6,7,5],
+      [9,6,10,8,2,4,5,7,1,3],
+      [10,4,5,7,1,2,9,3,6,8],
+      [9,3,6,8,2,1,4,10,7,5],
+      [8,6,9,1,10,4,5,7,3,2],
+      [6,8,9,3,4,10,7,5,2,1]]
+      
 switch=[36,52,42,48,34,46,38,44,40,50]
 gates=[7,10,6,5,4,2,8,3,11,9]
 
@@ -56,7 +69,7 @@ while True:
         i = board.digitalRead(21)
     end = time.time()
     print end-start
-    file.write("\n Time taken for phase1 : "+str(end - start))
+    file.write("\n Time taken for phase1 : " + str(int(end - start)) + " seconds")
     score_file = open('portal/score.txt', 'w')
     score_file.write(str(int(end-start)))
     score_file.close()

@@ -49,7 +49,7 @@ def teams(request):
 
 
 def leaderboard(request):
-    teams = Team.objects.order_by('-final_score')
+    teams = Team.objects.order_by('final_score')
     return render(
         request,
         'leaderboard.html',
@@ -67,7 +67,7 @@ def round1(request, team_name):
         file.write("")
         file.close()
         phase1(team_name)
-        text = team_name + ": Round2 Started"
+        text = team_name + ": Round1 Started"
         return render(
             request,
             'round.html',
