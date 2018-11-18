@@ -7,9 +7,7 @@ Pastforward is a competition hosted by ARC (Automation and Robotics Club) during
 
 ## Milestones:
 
-* To be decided
-* Once decided we will work on them sequentially.
-
+* Done and dusted. 😎
 
 
 ## Contributing
