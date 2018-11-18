@@ -5,7 +5,7 @@ import random
 file = open('portal/gate.txt', 'r')
 r = int(file.read())
 file.close()
-file.open('portal/output1.txt', 'a')
+file = open('portal/output1.txt', 'a')
 print "Round1 Started"
 file.write("Gate set: " + str(r) + "\n")
 file.write('Round 1 started.\n')
@@ -23,7 +23,7 @@ ar = [[10,3,7,5,8,2,1,9,4,6],
       [9,3,6,8,2,1,4,10,7,5],
       [8,6,9,1,10,4,5,7,3,2],
       [6,8,9,3,4,10,7,5,2,1]]
-      
+
 switch=[36,52,42,48,34,46,38,44,40,50]
 gates=[7,10,6,5,4,2,8,3,11,9]
 
@@ -44,7 +44,7 @@ def closeAllGates():
 
 for x in range(10):
     board.Servos.attach(gates[x])
-    board.Servos.write(gates[x],90)
+    board.Servos.write(gates[x],80)
 
 
 
@@ -64,7 +64,7 @@ while True:
                 servoClose(gates[ar[r][x]-1])
                 f=1
             if(f == 1):
-                board.Servos.write(gates[ar[r][x]-1],90)
+                board.Servos.write(gates[ar[r][x]-1],80)
                 file.write(str(x+1)+"------"+str(ar[r][x])+"\n")
         i = board.digitalRead(21)
     end = time.time()

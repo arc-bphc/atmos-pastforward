@@ -2,7 +2,7 @@ from Arduino import Arduino
 import time
 import random
 from operator import itemgetter
-board = Arduino('9600')
+board = Arduino('9600', port='/dev/ttyACM1')
 file = open('portal/gate.txt', 'r')
 r = int(file.read())
 file.close()
@@ -47,7 +47,7 @@ def servoClose(pin):
 tim = [[0, 1000, 0]] * 10  # ith element will store the time for which the ith gate need to be opened
 for x in range(10):
     board.Servos.attach(gates[x])
-    board.Servos.write(gates[x], 90)
+    board.Servos.write(gates[x], 80)
 #r = (int)(file.read())
 st = 0
 while True:
@@ -69,7 +69,7 @@ while True:
 
                 servoClose(gates[ar[r][x] - 1])
                 print str(switch[x]) + " " + str(ar[r][x] - 1)
-            board.Servos.write(gates[x], 90)
+            board.Servos.write(gates[x], 80)
             # board.digitalWrite(gates_led[ar[r][x]-1],"HIGH")
             # board.digitalWrite(gates_led[ar[r][x]-1],"LOW")
             if(i == 1):
@@ -92,7 +92,7 @@ while True:
             continue
         print tim[x][2] - 1
 
-        board.Servos.write(gates[tim[x][2] - 1], 90)
+        board.Servos.write(gates[tim[x][2] - 1], 80)
 
         t1 = 0
         t2 = 0
@@ -107,7 +107,7 @@ while True:
                 t1 = time.time()
                 while(board.digitalRead(12)):
                     for gate in gates:
-                        board.Servos.write(gate, 90)
+                        board.Servos.write(gate, 80)
                 t2 = time.time()
 
                 for gate in gates:
@@ -127,6 +127,7 @@ while True:
         # 	servoClose(gates[tim[x][2]-1])
         # 	penalty = penalty * 2
     main_end = time.time()
+    file.write("Penalty: " + str(int(penalty)) + "\n")
     file.write("score" + str(main_end - main_start + penalty))
     print(main_end - main_start + penalty)
     file_score = open('portal/score.txt', 'w')

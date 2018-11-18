@@ -1,2 +1,9 @@
+Round 2 started.
+Gate set: 0
+6 6
+5 9
+1 8
 
-Infinty Stone liftedscore41.8339619637
+Infinty Stone lifted
+Penalty: 5
+score122.457339048

@@ -1,0 +1,12 @@
+Gate set: 8
+Round 1 started.
+switch ------ gate
+3------9
+3------9
+5------10
+1------8
+3------9
+5------10
+1------8
+
+ Time taken for phase1 : 171 seconds
